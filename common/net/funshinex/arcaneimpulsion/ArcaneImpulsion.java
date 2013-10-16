@@ -1,7 +1,9 @@
 package net.funshinex.arcaneimpulsion;
 
 import net.funshinex.arcaneimpulsion.block.Blocks;
+import net.funshinex.arcaneimpulsion.client.interfaces.GuiHandler;
 import net.funshinex.arcaneimpulsion.config.ConfigHandler;
+import net.funshinex.arcaneimpulsion.item.Items;
 import net.funshinex.arcaneimpulsion.network.PacketHandler;
 import net.funshinex.arcaneimpulsion.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
@@ -28,14 +30,18 @@ public class ArcaneImpulsion {
 		
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
 		
+		Items.init();
 		Blocks.init();
 	}
 	
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		Items.addNames();
 		Blocks.addNames();
 		
 		Blocks.registerTileEntities();	
+		
+        new GuiHandler();
 	}
 	
 	@EventHandler

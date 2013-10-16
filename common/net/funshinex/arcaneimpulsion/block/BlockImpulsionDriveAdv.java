@@ -1,15 +1,21 @@
 package net.funshinex.arcaneimpulsion.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.funshinex.arcaneimpulsion.tileentity.TileEntityImpulsionDriveAdv;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockImpulsionDriveAdv extends BlockImpulsionDriveBasic {
+public class BlockImpulsionDriveAdv extends BlockContainer {
 
 	public BlockImpulsionDriveAdv(int id) {
-		super(id);
+		super(id, Material.iron);
 		
 		setCreativeTab(CreativeTabs.tabRedstone);
 		setHardness(50.0F);
@@ -17,6 +23,34 @@ public class BlockImpulsionDriveAdv extends BlockImpulsionDriveBasic {
 		setStepSound(Block.soundMetalFootstep);
 		
 		setUnlocalizedName(BlockInfo.IMPULSION_DRIVE_ADVANCED_UNLOCALIZED_NAME);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	private Icon topIcon;
+	
+	@SideOnly(Side.CLIENT)
+	private Icon sideIcon;
+	
+	@SideOnly(Side.CLIENT)
+	private Icon bottomIcon;
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerIcons(IconRegister register) {
+		topIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.IMPULSION_DRIVE_ADVANCED_TOP);
+		sideIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.IMPULSION_DRIVE_ADVANCED_SIDE);
+		bottomIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.IMPULSION_DRIVE_ADVANCED_BOTTOM);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public Icon getIcon(int side, int meta) {
+		
+		if (side == 1) {
+			return topIcon;
+		} else {
+			return sideIcon;
+		}
 	}
 
 	@Override

@@ -1,11 +1,31 @@
 package net.funshinex.arcaneimpulsion.tileentity;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityImpulsionDriveAdv extends TileEntityImpulsionDriveBasic {
 
-	private static final int BASE_MAX_STORAGE = 8;
+public class TileEntityImpulsionDriveAdv extends TileEntity {
 	
 	public TileEntityImpulsionDriveAdv() {
-		super();	
 	}
+	
+	@Override
+    public void updateEntity() {
+        if (!worldObj.isRemote) {
+        	
+        	
+        }
+    }
+	
+	@Override
+    public void writeToNBT(NBTTagCompound compound) {
+        super.writeToNBT(compound);
+
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        super.readFromNBT(compound);
+
+    }
 }

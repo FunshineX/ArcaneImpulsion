@@ -1,7 +1,7 @@
 package net.funshinex.arcaneimpulsion.block;
 
 import net.funshinex.arcaneimpulsion.ArcaneImpulsion;
-import net.funshinex.arcaneimpulsion.tileentity.TileEntityArcaneCollector;
+import net.funshinex.arcaneimpulsion.tileentity.TileEntityIMStorage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -15,9 +15,9 @@ import cpw.mods.fml.common.network.FMLNetworkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockArcaneCollector extends BlockContainer {
+public class BlockIMStorage extends BlockContainer {
 
-	protected BlockArcaneCollector(int id) {
+	protected BlockIMStorage(int id) {
 		super(id, Material.iron);
 		
 		setCreativeTab(CreativeTabs.tabRedstone);
@@ -25,7 +25,7 @@ public class BlockArcaneCollector extends BlockContainer {
 		setResistance(10.0F);
 		setStepSound(Block.soundMetalFootstep);
 
-		setUnlocalizedName(BlockInfo.ARCANE_COLLECTOR_UNLOCALIZED_NAME);
+		setUnlocalizedName(BlockInfo.IM_STORAGE_UNLOCALIZED_NAME);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -40,9 +40,9 @@ public class BlockArcaneCollector extends BlockContainer {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void registerIcons(IconRegister register) {
-		topIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.ARCANE_COLLECTOR_TOP);
-		sideIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.ARCANE_COLLECTOR_SIDE);
-		bottomIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.ARCANE_COLLECTOR_BOTTOM);
+		topIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.IM_STORAGE_TOP);
+		sideIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.IM_STORAGE_SIDE);
+		bottomIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.IM_STORAGE_BOTTOM);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -58,13 +58,13 @@ public class BlockArcaneCollector extends BlockContainer {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityArcaneCollector();
+		return new TileEntityIMStorage();
 	}
 	
 	@Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         if(!world.isRemote) {
-        	FMLNetworkHandler.openGui(player, ArcaneImpulsion.instance, 0, world, x, y, z);
+        	FMLNetworkHandler.openGui(player, ArcaneImpulsion.instance, 3, world, x, y, z);
         	
         }
         return true;

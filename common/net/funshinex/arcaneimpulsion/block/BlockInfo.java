@@ -26,7 +26,7 @@ public class BlockInfo {
     public static final String IMPULSION_DRIVE_ADVANCED_SIDE = "impulsion_drive_advanced_side";
     public static final String IMPULSION_DRIVE_ADVANCED_BOTTOM = "impulsion_drive_advanced_bottom";
 
-	public static int ARCANE_COLLECTOR_ID = 0;
+	public static int ARCANE_COLLECTOR_ID;
 	public static final String ARCANE_COLLECTOR_KEY = "ArcaneCollector";
     public static final int ARCANE_COLLECTOR_DEFAULT = 3153;
 
@@ -36,5 +36,38 @@ public class BlockInfo {
     public static final String ARCANE_COLLECTOR_TOP = "arcane_collector_top";
     public static final String ARCANE_COLLECTOR_SIDE = "arcane_collector_side";
     public static final String ARCANE_COLLECTOR_BOTTOM = "arcane_collector_bottom";
+    
+    public static int ARCANE_EXTRACTOR_ID;
+	public static final String ARCANE_EXTRACTOR_KEY = "ArcaneExtractor";
+    public static final int ARCANE_EXTRACTOR_DEFAULT = 3154;
+
+    public static final String ARCANE_EXTRACTOR_UNLOCALIZED_NAME = "arcaneExtractor";
+    public static final String ARCANE_EXTRACTOR_NAME = "Arcane Extractor";
+
+    public static final String ARCANE_EXTRACTOR_TOP = "arcane_extractor_top";
+    public static final String ARCANE_EXTRACTOR_SIDE = "arcane_extractor_side";
+    public static final String ARCANE_EXTRACTOR_BOTTOM = "arcane_extractor_bottom";
+    
+    public static int ARCANE_CONDENSER_ID;
+	public static final String ARCANE_CONDENSER_KEY = "ArcaneCondenser";
+    public static final int ARCANE_CONDENSER_DEFAULT = 3155;
+
+    public static final String ARCANE_CONDENSER_UNLOCALIZED_NAME = "arcaneCondenser";
+    public static final String ARCANE_CONDENSER_NAME = "Arcane Condenser";
+
+    public static final String ARCANE_CONDENSER_TOP = "arcane_condenser_top";
+    public static final String ARCANE_CONDENSER_SIDE = "arcane_condenser_side";
+    public static final String ARCANE_CONDENSER_BOTTOM = "arcane_condenser_bottom";
+    
+    public static int IM_STORAGE_ID;
+	public static final String IM_STORAGE_KEY = "IMStorage";
+    public static final int IM_STORAGE_DEFAULT = 3156;
+
+    public static final String IM_STORAGE_UNLOCALIZED_NAME = "imStorage";
+    public static final String IM_STORAGE_NAME = "IM Storage";
+
+    public static final String IM_STORAGE_TOP = "im_storage_top";
+    public static final String IM_STORAGE_SIDE = "im_storage_side";
+    public static final String IM_STORAGE_BOTTOM = "im_storage_bottom";
 	
 }

@@ -4,15 +4,15 @@ import net.funshinex.arcaneimpulsion.block.BlockInfo;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityArcaneCollector extends TileEntity {
+public class TileEntityIMStorage extends TileEntity {
 
-	private static final int MAX_STORAGE = 32;
-	private static final int DEFAULT_COLLECT_INTERVAL = 100;
+	private static final int MAX_STORAGE = 128;
+	private static final int DEFAULT_COLLECT_INTERVAL = 40;
 	
 	private int internalStorage;	
 	private int collectInterval;
 	
-	public TileEntityArcaneCollector() {
+	public TileEntityIMStorage() {
 		collectInterval = DEFAULT_COLLECT_INTERVAL;
 	}
 	
@@ -22,7 +22,7 @@ public class TileEntityArcaneCollector extends TileEntity {
         	
         	if (collectInterval == 0){
 		
-				tryCollect(1);	
+				tryCollect(4);	
 				
 				collectInterval = DEFAULT_COLLECT_INTERVAL;
         	}
@@ -51,31 +51,22 @@ public class TileEntityArcaneCollector extends TileEntity {
     	int actualAmount = 0;
     	for (int i=-1; i<=1; i++) {
     		for (int j=-1; j<=1; j++) {
-    			if (worldObj.getBlockId(xCoord+i, yCoord, zCoord+j) == BlockInfo.IMPULSION_DRIVE_BASIC_ID) {
-    				TileEntityImpulsionDriveBasic teImpulsionDriveBasic = (TileEntityImpulsionDriveBasic)worldObj.getBlockTileEntity(xCoord+i, yCoord, zCoord+j);
+    			if (worldObj.getBlockId(xCoord+i, yCoord, zCoord+j) == BlockInfo.ARCANE_COLLECTOR_ID) {
+    				TileEntityArcaneCollector teArcaneCollector = (TileEntityArcaneCollector)worldObj.getBlockTileEntity(xCoord+i, yCoord, zCoord+j);
     			
     				if (amount + internalStorage > MAX_STORAGE)
     					amount = MAX_STORAGE - internalStorage;
     				
-    				actualAmount = teImpulsionDriveBasic.requestEnergy(amount);
+    				actualAmount = teArcaneCollector.requestEnergy(amount);
     				
     				internalStorage += actualAmount;
     			}
-    			if (worldObj.getBlockId(xCoord+i, yCoord, zCoord+j) == BlockInfo.ARCANE_EXTRACTOR_ID) {
-    				TileEntityArcaneExtractor teArcaneExtractor = (TileEntityArcaneExtractor)worldObj.getBlockTileEntity(xCoord+i, yCoord, zCoord+j);
     			
-    				if (amount + internalStorage > MAX_STORAGE)
-    					amount = MAX_STORAGE - internalStorage;
-    				
-    				actualAmount = teArcaneExtractor.requestEnergy(amount);
-    				
-    				internalStorage += actualAmount;
-    			}
     		}
     	}
     	
     	if (internalStorage > 0) {
-    		//System.out.println("Collector collected: " + actualAmount + ", total: " + internalStorage);
+    		//System.out.println("Storage collected: " + actualAmount + ", total: " + internalStorage);
     	}
     }
     
@@ -90,15 +81,4 @@ public class TileEntityArcaneCollector extends TileEntity {
     public void setInternalStorage(int amount) {
     	internalStorage = amount;
     }
-    
-    public int requestEnergy(int amount) {
-		
-		if (amount > internalStorage) { 
-			amount = internalStorage;
-		}
-		
-		internalStorage -= amount;
-		
-		return amount;		
-	}
 }

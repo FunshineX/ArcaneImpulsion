@@ -40,7 +40,7 @@ public class TileEntityImpulsionDriveBasic extends TileEntity {
         		findImpulseBlock(worldObj, xCoord, yCoord, zCoord);	
 				
 				if (impulseBlockExists) {
-					System.out.println("Found Impulse Block at " + impulseBlockLocX + "," + impulseBlockLocY + "," + impulseBlockLocZ);
+					//System.out.println("Found Impulse Block at " + impulseBlockLocX + "," + impulseBlockLocY + "," + impulseBlockLocZ);
 				}
 				lastChecked = IMPULSE_BLOCK_CHECK_REFRESH_RATE;
         	}
