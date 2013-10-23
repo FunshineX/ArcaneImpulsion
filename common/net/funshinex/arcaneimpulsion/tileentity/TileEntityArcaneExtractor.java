@@ -1,6 +1,7 @@
 package net.funshinex.arcaneimpulsion.tileentity;
 
-import net.funshinex.arcaneimpulsion.block.BlockInfo;
+import net.funshinex.arcaneimpulsion.item.ItemInfo;
+import net.funshinex.arcaneimpulsion.item.Items;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -22,7 +23,7 @@ public class TileEntityArcaneExtractor extends TileEntity implements IInventory 
 	public TileEntityArcaneExtractor() {
 		extractInterval = DEFAULT_EXTRACT_INTERVAL;
 		
-		items = new ItemStack[1];
+		items = new ItemStack[3];
 	}
 	
 	@Override
@@ -32,12 +33,14 @@ public class TileEntityArcaneExtractor extends TileEntity implements IInventory 
         	if (extractInterval == 0) {
 		
         		if (internalStorage == 0) {
-        			tryExtract();	
+        			if (tryExtract()) {
+        				extractInterval = DEFAULT_EXTRACT_INTERVAL;
+        			}
         		}
-
-				extractInterval = DEFAULT_EXTRACT_INTERVAL;
         	}
+        	
         	extractInterval--;
+        	if (extractInterval < 0) extractInterval = 0;
         }
     }
 
@@ -114,11 +117,17 @@ public class TileEntityArcaneExtractor extends TileEntity implements IInventory 
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return itemstack.itemID == Block.dirt.blockID ||
-			   itemstack.itemID == Block.cobblestone.blockID;
-	}   
-	
-
+		
+		switch(i) {
+			case 0:
+				return itemstack.itemID == Block.dirt.blockID ||
+				   itemstack.itemID == Block.cobblestone.blockID;
+			case 1:
+				return itemstack.itemID == ItemInfo.ARCANE_TEMPLATE_ID;
+			default:
+				return false;
+		}	
+	}
 	
 	@Override
     public void writeToNBT(NBTTagCompound compound) {
@@ -163,14 +172,14 @@ public class TileEntityArcaneExtractor extends TileEntity implements IInventory 
 		super.onInventoryChanged();
 	}
     
-    private void tryExtract() {
+    private boolean tryExtract() {
     	
     	if (items[0] == null || items[0].stackSize < 1)
-    		return;
+    		return false;
     	
     	int amount = 0;
     	ItemStack itemStack = items[0];
-    	
+    	ItemStack itemTemplate = items[1];    	
     	
     	if (itemStack.itemID == Block.cobblestone.blockID)
     		amount = 1;
@@ -186,9 +195,20 @@ public class TileEntityArcaneExtractor extends TileEntity implements IInventory 
     		}
     	}
     	
+    	if (itemTemplate != null && 
+    			itemTemplate.stackSize > 0 && 
+    			itemTemplate.itemID == new ItemStack(Items.arcaneTemplate, 1).itemID &&
+    			items[2] == null ) {
+    		items[2] = items[1].copy();
+    		items[2].setItemDamage(amount);
+    		items[1] = null;
+    	}
+    	
     	if (internalStorage > 0) {
     		System.out.println("Extractor collected: " + amount + ", total: " + internalStorage);
     	}
+    	
+    	return true;
     }
     
     public int getTimer() {

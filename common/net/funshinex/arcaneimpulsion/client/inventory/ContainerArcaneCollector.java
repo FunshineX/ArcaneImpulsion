@@ -1,6 +1,6 @@
-package net.funshinex.arcaneimpulsion.client.interfaces;
+package net.funshinex.arcaneimpulsion.client.inventory;
 
-import net.funshinex.arcaneimpulsion.tileentity.TileEntityArcaneCondenser;
+import net.funshinex.arcaneimpulsion.tileentity.TileEntityArcaneCollector;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -8,12 +8,12 @@ import net.minecraft.inventory.ICrafting;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ContainerArcaneCondenser extends Container{
+public class ContainerArcaneCollector extends Container{
 
-	TileEntityArcaneCondenser arcaneCondenser;
+	TileEntityArcaneCollector arcaneCollector;
 	
-	public ContainerArcaneCondenser(InventoryPlayer invPlayer, TileEntityArcaneCondenser arcaneCondenser) {
-		this.arcaneCondenser = arcaneCondenser;
+	public ContainerArcaneCollector(InventoryPlayer invPlayer, TileEntityArcaneCollector arcaneCollector) {
+		this.arcaneCollector = arcaneCollector;
 	}
 		
 	@Override
@@ -25,14 +25,13 @@ public class ContainerArcaneCondenser extends Container{
 	public void addCraftingToCrafters(ICrafting player) {
 		super.addCraftingToCrafters(player);
 		
-		player.sendProgressBarUpdate(this, 0, arcaneCondenser.getNearbyStorage());
-		
+		player.sendProgressBarUpdate(this, 0, arcaneCollector.getInternalStorage());
 	}
 	
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {
-		arcaneCondenser.setNearbyStorage(data);
+		arcaneCollector.setInternalStorage(data);
 	}
 	
 	@Override
@@ -40,8 +39,9 @@ public class ContainerArcaneCondenser extends Container{
 		super.detectAndSendChanges();
 		
 		for (Object player : crafters) {
-			((ICrafting)player).sendProgressBarUpdate(this, 0, arcaneCondenser.getNearbyStorage());
+			((ICrafting)player).sendProgressBarUpdate(this, 0, arcaneCollector.getInternalStorage());
 		}
+		
 	}
 
 }

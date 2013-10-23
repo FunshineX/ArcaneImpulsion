@@ -1,4 +1,4 @@
-package net.funshinex.arcaneimpulsion.client.interfaces;
+package net.funshinex.arcaneimpulsion.client.inventory;
 
 import org.lwjgl.opengl.GL11;
 

@@ -1,4 +1,4 @@
-package net.funshinex.arcaneimpulsion.client.interfaces;
+package net.funshinex.arcaneimpulsion.client.inventory;
 
 import net.funshinex.arcaneimpulsion.ArcaneImpulsion;
 import net.funshinex.arcaneimpulsion.tileentity.TileEntityArcaneCollector;

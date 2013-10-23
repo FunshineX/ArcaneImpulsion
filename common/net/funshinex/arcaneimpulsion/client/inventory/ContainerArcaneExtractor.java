@@ -1,5 +1,7 @@
-package net.funshinex.arcaneimpulsion.client.interfaces;
+package net.funshinex.arcaneimpulsion.client.inventory;
 
+import net.funshinex.arcaneimpulsion.client.inventory.slot.SlotTemplateInput;
+import net.funshinex.arcaneimpulsion.client.inventory.slot.SlotTemplateOutput;
 import net.funshinex.arcaneimpulsion.tileentity.TileEntityArcaneExtractor;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,6 +31,8 @@ public class ContainerArcaneExtractor extends Container{
 		}
 		
 		addSlotToContainer(new Slot(arcaneExtractor, 0, 80, 35));
+		addSlotToContainer(new SlotTemplateInput(arcaneExtractor, 1, 56, 60));
+		addSlotToContainer(new SlotTemplateOutput(arcaneExtractor, 2, 103, 60));
 	}
 		
 	@Override

@@ -1,7 +1,7 @@
 package net.funshinex.arcaneimpulsion;
 
 import net.funshinex.arcaneimpulsion.block.Blocks;
-import net.funshinex.arcaneimpulsion.client.interfaces.GuiHandler;
+import net.funshinex.arcaneimpulsion.client.inventory.GuiHandler;
 import net.funshinex.arcaneimpulsion.config.ConfigHandler;
 import net.funshinex.arcaneimpulsion.item.Items;
 import net.funshinex.arcaneimpulsion.network.PacketHandler;
@@ -32,6 +32,9 @@ public class ArcaneImpulsion {
 		
 		Items.init();
 		Blocks.init();
+		
+		proxy.initSounds();
+        proxy.initRenderers();
 	}
 	
 	@EventHandler
