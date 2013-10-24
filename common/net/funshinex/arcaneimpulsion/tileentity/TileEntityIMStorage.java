@@ -57,7 +57,7 @@ public class TileEntityIMStorage extends TileEntity {
     				if (amount + internalStorage > MAX_STORAGE)
     					amount = MAX_STORAGE - internalStorage;
     				
-    				actualAmount = teArcaneCollector.requestEnergy(amount);
+    				actualAmount = teArcaneCollector.requestEnergy(amount, true);
     				
     				internalStorage += actualAmount;
     			}
@@ -81,4 +81,19 @@ public class TileEntityIMStorage extends TileEntity {
     public void setInternalStorage(int amount) {
     	internalStorage = amount;
     }
+    
+    public int requestEnergy(int amount, boolean allowPartial) {
+		
+		if (amount > internalStorage) { 
+			
+			if (allowPartial)
+				amount = internalStorage;
+			else
+				return 0;
+		}
+		
+		internalStorage -= amount;
+		
+		return amount;		
+	}
 }

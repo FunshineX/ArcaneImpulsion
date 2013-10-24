@@ -6,19 +6,19 @@ import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemArcaneTemplate extends Item {
+public class ItemArcaneWrench extends Item {
 	
-	public ItemArcaneTemplate(int id) {
+	public ItemArcaneWrench(int id) {
 		super(id);
 		
 		setMaxStackSize(1);
-        setUnlocalizedName(ItemInfo.ARCANE_TEMPLATE_UNLOCALIZED_NAME);
+        setUnlocalizedName(ItemInfo.ARCANE_WRENCH_UNLOCALIZED_NAME);
         setCreativeTab(ArcaneImpulsion.tabArcaneImpulsion);
 	}
 
 	@Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister register) {
-        itemIcon = register.registerIcon(ItemInfo.TEXTURE_LOCATION + ":" + ItemInfo.ARCANE_TEMPLATE_ICON);
+        itemIcon = register.registerIcon(ItemInfo.TEXTURE_LOCATION + ":" + ItemInfo.ARCANE_WRENCH_ICON);
     }
 }

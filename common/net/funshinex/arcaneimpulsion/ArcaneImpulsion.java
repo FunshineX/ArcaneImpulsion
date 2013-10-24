@@ -6,6 +6,7 @@ import net.funshinex.arcaneimpulsion.config.ConfigHandler;
 import net.funshinex.arcaneimpulsion.item.Items;
 import net.funshinex.arcaneimpulsion.network.PacketHandler;
 import net.funshinex.arcaneimpulsion.proxy.CommonProxy;
+import net.minecraft.creativetab.CreativeTabs;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -25,6 +26,8 @@ public class ArcaneImpulsion {
 	@SidedProxy(clientSide="net.funshinex.arcaneimpulsion.proxy.ClientProxy", serverSide="net.funshinex.arcaneimpulsion.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	
+	public static CreativeTabs tabArcaneImpulsion = new CreativeTabArcaneImpulsion(CreativeTabs.getNextID(), ModInformation.NAME);
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		
@@ -35,6 +38,8 @@ public class ArcaneImpulsion {
 		
 		proxy.initSounds();
         proxy.initRenderers();
+        proxy.addRecipes();
+        proxy.addStringLocalizations();
 	}
 	
 	@EventHandler

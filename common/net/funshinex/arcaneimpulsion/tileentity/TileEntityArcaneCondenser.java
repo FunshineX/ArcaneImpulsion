@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityArcaneCondenser extends TileEntity implements IInventory {
 
-	private static final int DEFAULT_UPDATE_INTERVAL = 40;
+	private static final int DEFAULT_UPDATE_INTERVAL = 5;
 	private static final int DEFAULT_CONDENSE_INTERVAL = 5;
 	
 	private int availableIMs;	
@@ -180,24 +180,49 @@ public class TileEntityArcaneCondenser extends TileEntity implements IInventory 
     	
     	switch (items[0].getItemDamage()) {
     		case 1:
-    			if (availableIMs > 1)
-    				if (items[1] == null)
+    			if (availableIMs >= 1)
+    				if (items[1] == null && consumeIMsForCondense(1) > 0)    					
     					items[1] = new ItemStack(Block.cobblestone,1);
-    				else if (items[1].isItemEqual(new ItemStack(Block.cobblestone,1)) && items[1].stackSize < 64)
+    				else if (items[1].isItemEqual(new ItemStack(Block.cobblestone,1)) && items[1].stackSize < 64 && consumeIMsForCondense(1) > 0)
     					items[1].stackSize++;
     			
     			break;
     		
     		case 2:
-    			if (availableIMs > 2)
-    				if (items[1] == null)
+    			if (availableIMs >= 2)
+    				if (items[1] == null && consumeIMsForCondense(2) > 0)
     					items[1] = new ItemStack(Block.dirt,1);
-    				else if (items[1].isItemEqual(new ItemStack(Block.dirt,1)) && items[1].stackSize < 64)
+    				else if (items[1].isItemEqual(new ItemStack(Block.dirt,1)) && items[1].stackSize < 64 && consumeIMsForCondense(2) > 0)
     					items[1].stackSize++;
     			break;
     	}
     	
     	return true;
+    }
+    
+    private int consumeIMsForCondense(int amount) {
+    	
+    	int actualAmount = 0;
+    	
+    	for (int i=-1; i<=1; i++) {
+			for (int j=-1; j<=1; j++) {
+				if (worldObj.getBlockId(xCoord+i, yCoord, zCoord+j) == BlockInfo.IM_STORAGE_ID) {
+					TileEntityIMStorage teIMStorage = (TileEntityIMStorage)worldObj.getBlockTileEntity(xCoord+i, yCoord, zCoord+j);
+				
+					actualAmount = teIMStorage.requestEnergy(amount, false);
+					
+					if (actualAmount > 0) return actualAmount;
+				}
+				else if (worldObj.getBlockId(xCoord+i, yCoord, zCoord+j) == BlockInfo.ARCANE_COLLECTOR_ID) {
+					TileEntityArcaneCollector teArcaneCollector = (TileEntityArcaneCollector)worldObj.getBlockTileEntity(xCoord+i, yCoord, zCoord+j);
+				
+					actualAmount = teArcaneCollector.requestEnergy(amount, false);
+					
+					if (actualAmount > 0) return actualAmount;
+				}				
+			}
+		}
+    	return 0;
     }
     
     public int getNearbyStorage() {

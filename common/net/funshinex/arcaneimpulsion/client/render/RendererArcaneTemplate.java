@@ -3,7 +3,6 @@ package net.funshinex.arcaneimpulsion.client.render;
 import net.funshinex.arcaneimpulsion.item.Items;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -16,7 +15,7 @@ public class RendererArcaneTemplate implements IItemRenderer {
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-		return item.itemID == Items.arcaneTemplate.itemID;
+		return item.itemID == Items.arcaneTemplate.itemID && !(type == ItemRenderType.EQUIPPED_FIRST_PERSON || type == ItemRenderType.EQUIPPED);
 	}
 
 	@Override

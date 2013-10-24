@@ -223,10 +223,14 @@ public class TileEntityArcaneExtractor extends TileEntity implements IInventory 
     	internalStorage = amount;
     }
     
-    public int requestEnergy(int amount) {
+    public int requestEnergy(int amount, boolean allowPartial) {
 		
 		if (amount > internalStorage) { 
-			amount = internalStorage;
+			
+			if (allowPartial)
+				amount = internalStorage;
+			else
+				return 0;
 		}
 		
 		internalStorage -= amount;

@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -19,8 +18,8 @@ public class BlockIMStorage extends BlockContainer {
 
 	protected BlockIMStorage(int id) {
 		super(id, Material.iron);
-		
-		setCreativeTab(CreativeTabs.tabRedstone);
+
+        setCreativeTab(ArcaneImpulsion.tabArcaneImpulsion);
 		setHardness(50.0F);
 		setResistance(10.0F);
 		setStepSound(Block.soundMetalFootstep);

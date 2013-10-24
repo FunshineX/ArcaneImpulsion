@@ -152,10 +152,14 @@ public class TileEntityImpulsionDriveBasic extends TileEntity {
 		}
 	}
 	
-	public int requestEnergy(int amount) {
+	public int requestEnergy(int amount, boolean allowPartial) {
 		
 		if (amount > internalStorage) { 
-			amount = internalStorage;
+			
+			if (allowPartial)
+				amount = internalStorage;
+			else
+				return 0;
 		}
 		
 		internalStorage -= amount;

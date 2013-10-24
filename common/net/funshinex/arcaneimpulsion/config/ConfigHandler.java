@@ -21,6 +21,8 @@ public class ConfigHandler {
 		BlockInfo.IM_STORAGE_ID = config.getBlock(BlockInfo.IM_STORAGE_KEY,  BlockInfo.IM_STORAGE_DEFAULT).getInt();
 		
 		ItemInfo.ARCANE_TEMPLATE_ID = config.getItem(ItemInfo.ARCANE_TEMPLATE_KEY, ItemInfo.ARCANE_TEMPLATE_DEFAULT).getInt() - 256;
+		ItemInfo.ARCANE_ORB_ID = config.getItem(ItemInfo.ARCANE_ORB_KEY, ItemInfo.ARCANE_ORB_DEFAULT).getInt() - 256;
+		ItemInfo.ARCANE_WRENCH_ID = config.getItem(ItemInfo.ARCANE_WRENCH_KEY, ItemInfo.ARCANE_WRENCH_DEFAULT).getInt() - 256;
 		
 		config.save();
 	}

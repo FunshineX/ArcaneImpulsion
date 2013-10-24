@@ -57,7 +57,7 @@ public class TileEntityArcaneCollector extends TileEntity {
     				if (amount + internalStorage > MAX_STORAGE)
     					amount = MAX_STORAGE - internalStorage;
     				
-    				actualAmount = teImpulsionDriveBasic.requestEnergy(amount);
+    				actualAmount = teImpulsionDriveBasic.requestEnergy(amount, true);
     				
     				internalStorage += actualAmount;
     			}
@@ -67,7 +67,7 @@ public class TileEntityArcaneCollector extends TileEntity {
     				if (amount + internalStorage > MAX_STORAGE)
     					amount = MAX_STORAGE - internalStorage;
     				
-    				actualAmount = teArcaneExtractor.requestEnergy(amount);
+    				actualAmount = teArcaneExtractor.requestEnergy(amount, true);
     				
     				internalStorage += actualAmount;
     			}
@@ -91,10 +91,14 @@ public class TileEntityArcaneCollector extends TileEntity {
     	internalStorage = amount;
     }
     
-    public int requestEnergy(int amount) {
+    public int requestEnergy(int amount, boolean allowPartial) {
 		
 		if (amount > internalStorage) { 
-			amount = internalStorage;
+			
+			if (allowPartial)
+				amount = internalStorage;
+			else
+				return 0;
 		}
 		
 		internalStorage -= amount;
