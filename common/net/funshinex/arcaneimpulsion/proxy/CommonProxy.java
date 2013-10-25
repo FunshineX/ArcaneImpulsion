@@ -1,10 +1,16 @@
 package net.funshinex.arcaneimpulsion.proxy;
 
 import net.funshinex.arcaneimpulsion.block.Blocks;
+import net.funshinex.arcaneimpulsion.client.keybind.KeyBindWrenchMode;
 import net.funshinex.arcaneimpulsion.item.Items;
 import net.minecraft.block.Block;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import org.lwjgl.input.Keyboard;
+
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -14,6 +20,12 @@ public class CommonProxy {
     }
 
     public void initRenderers() {
+    }
+    
+    public void addKeyBindings() {
+    	KeyBinding[] keys = {new KeyBinding("ArcaneWrenchModeToggle", Keyboard.KEY_M)};
+    	boolean[] repeats = {false};
+    	KeyBindingRegistry.registerKeyBinding(new KeyBindWrenchMode(keys, repeats));
     }
     
     public void addRecipes() {

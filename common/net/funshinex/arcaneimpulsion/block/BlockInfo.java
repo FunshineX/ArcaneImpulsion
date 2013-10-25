@@ -12,6 +12,7 @@ public class BlockInfo {
     public static final String IMPULSION_DRIVE_BASIC_NAME = "Basic Impulsion Drive";
 
     public static final String IMPULSION_DRIVE_BASIC_TOP = "impulsion_drive_basic_top";
+    public static final String IMPULSION_DRIVE_BASIC_TOP_ACTIVE = "impulsion_drive_basic_top_active";
     public static final String IMPULSION_DRIVE_BASIC_SIDE = "impulsion_drive_basic_side";
     public static final String IMPULSION_DRIVE_BASIC_BOTTOM = "impulsion_drive_basic_bottom";
     
@@ -69,5 +70,15 @@ public class BlockInfo {
     public static final String IM_STORAGE_TOP = "im_storage_top";
     public static final String IM_STORAGE_SIDE = "im_storage_side";
     public static final String IM_STORAGE_BOTTOM = "im_storage_bottom";
+    
+    
+    public static boolean isAttuneableBlock(int blockId) {
+    	return (blockId == IMPULSION_DRIVE_BASIC_ID ||
+    			blockId == IMPULSION_DRIVE_ADVANCED_ID ||
+    			blockId == ARCANE_COLLECTOR_ID ||
+    			blockId == ARCANE_EXTRACTOR_ID ||
+    			blockId == ARCANE_CONDENSER_ID ||
+    			blockId == IM_STORAGE_ID);
+    }
 	
 }

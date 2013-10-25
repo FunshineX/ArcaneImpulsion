@@ -50,6 +50,8 @@ public class ArcaneImpulsion {
 		Blocks.registerTileEntities();	
 		
         new GuiHandler();
+        
+        proxy.addKeyBindings();
 	}
 	
 	@EventHandler

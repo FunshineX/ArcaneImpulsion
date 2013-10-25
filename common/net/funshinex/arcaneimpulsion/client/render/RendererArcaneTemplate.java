@@ -1,9 +1,11 @@
 package net.funshinex.arcaneimpulsion.client.render;
 
 import net.funshinex.arcaneimpulsion.item.Items;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraftforge.client.IItemRenderer;
@@ -35,8 +37,8 @@ public class RendererArcaneTemplate implements IItemRenderer {
 		case 1:			
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glScalef(.5F, .5F, .5F);
-			text = "cobble";
-			fontRenderer.drawStringWithShadow(text, 7, 13, 0xFFFFFF);
+			icon = Block.blockDiamond.getIcon(1, 1);
+			renderItem.renderIcon(0, 0, icon, 16, 16);
 			break;
 		
 		case 2:

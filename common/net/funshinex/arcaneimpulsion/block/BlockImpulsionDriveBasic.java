@@ -30,6 +30,9 @@ public class BlockImpulsionDriveBasic extends BlockContainer {
 	private Icon topIcon;
 	
 	@SideOnly(Side.CLIENT)
+	private Icon activeTopIcon;
+	
+	@SideOnly(Side.CLIENT)
 	private Icon sideIcon;
 	
 	@SideOnly(Side.CLIENT)
@@ -39,6 +42,7 @@ public class BlockImpulsionDriveBasic extends BlockContainer {
 	@Override
 	public void registerIcons(IconRegister register) {
 		topIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.IMPULSION_DRIVE_BASIC_TOP);
+		activeTopIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.IMPULSION_DRIVE_BASIC_TOP_ACTIVE);
 		sideIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.IMPULSION_DRIVE_BASIC_SIDE);
 		bottomIcon = register.registerIcon(BlockInfo.TEXTURE_LOCATION + ":" + BlockInfo.IMPULSION_DRIVE_BASIC_BOTTOM);
 	}
@@ -47,11 +51,13 @@ public class BlockImpulsionDriveBasic extends BlockContainer {
 	@Override
 	public Icon getIcon(int side, int meta) {
 		
-		if (side == 1) {
-			return topIcon;
-		} else {
-			return sideIcon;
-		}
+		if (side == 0) {
+            return bottomIcon;
+        } else if (side == 1) {
+            return isActivated(meta) ? activeTopIcon : topIcon;
+        } else {
+            return sideIcon;
+        }
 	}
 	
 	@Override
@@ -76,5 +82,9 @@ public class BlockImpulsionDriveBasic extends BlockContainer {
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityImpulsionDriveBasic();
 	}
+	
+	private boolean isActivated(int meta) {
+        return meta == 1;
+    }
 
 }
