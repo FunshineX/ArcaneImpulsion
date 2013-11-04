@@ -4,7 +4,9 @@ import java.util.List;
 
 import net.funshinex.arcaneimpulsion.ArcaneImpulsion;
 import net.funshinex.arcaneimpulsion.block.BlockInfo;
+import net.funshinex.arcaneimpulsion.client.inventory.ContainerArcaneWrench;
 import net.funshinex.arcaneimpulsion.client.keybind.KeyBindWrenchMode;
+import net.funshinex.arcaneimpulsion.config.IMValues;
 import net.funshinex.arcaneimpulsion.util.ArcaneWrenchModes;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -53,11 +55,16 @@ public class ItemArcaneWrench extends Item {
 		
 		list.add("IMs: " + stack.stackTagCompound.getInteger("IMs") + "/" + stack.stackTagCompound.getInteger("MaxIMs"));
 		list.add("Mode: " + stack.stackTagCompound.getInteger("WrenchMode"));
+		list.add("Testing: " + stack.stackTagCompound.getString("Test"));
 	}
 	
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int par4, boolean par5) {
+	public void onUpdate(ItemStack stack, World world, Entity entity, int indexInInventory, boolean isCurrentItem) {
 		if(!world.isRemote) {
+			if (stack.stackTagCompound == null) {
+        		initStackTag(stack);
+        	}
+			
 			if(KeyBindWrenchMode.keyPressed) {
 				KeyBindWrenchMode.keyPressed = false;
 				
@@ -73,6 +80,13 @@ public class ItemArcaneWrench extends Item {
 	    	  
 	    	
 	    		stack.stackTagCompound.setInteger("WrenchMode", nmode);
+	    		
+	    		stack.stackTagCompound.setString("Test", "testing");
+			}
+			
+			if (((EntityPlayer)entity).openContainer != null && ((EntityPlayer)entity).openContainer instanceof ContainerArcaneWrench) {
+				ContainerArcaneWrench container = (ContainerArcaneWrench) ((EntityPlayer)entity).openContainer;
+				container.saveToNBT(stack);
 			}
 		}
 	}
@@ -90,6 +104,7 @@ public class ItemArcaneWrench extends Item {
         	ArcaneWrenchModes mode = ArcaneWrenchModes.values()[nmode];
         	
         	int blockId = world.getBlockId(x,y,z);
+        	int blockMeta = world.getBlockMetadata(x, y, z);
         	
         	if (player.isSneaking()) {
         		return true;     		
@@ -124,9 +139,14 @@ public class ItemArcaneWrench extends Item {
 					cost = 2;
 				}
         		
+        		System.out.println(blockId);
+        		if (IMValues.ims.containsKey(blockId)) {
+        			cost = IMValues.ims.get(blockId);
+        		}
+        		
         		if (cost > 0 && ims >= cost) {
         			ims = ims - cost;
-        			Entity e = new EntityItem(world,x+.5,y+1.5,z+.5,new ItemStack(blockId,1,1));
+        			Entity e = new EntityItem(world,x+.5,y+1.5,z+.5,new ItemStack(blockId,1,blockMeta));
         			e.motionX = 0;
         			e.motionY = 0;
         			e.motionZ = 0;
@@ -147,6 +167,16 @@ public class ItemArcaneWrench extends Item {
             return false;
         }
     }
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world,	EntityPlayer player) {
+		
+		if(!world.isRemote && player.isSneaking()) {
+			player.openGui(ArcaneImpulsion.instance, 4, world, 0, 0, 0);
+		}
+		
+		return stack;
+	}
 	
 	private void initStackTag(ItemStack stack) {
 

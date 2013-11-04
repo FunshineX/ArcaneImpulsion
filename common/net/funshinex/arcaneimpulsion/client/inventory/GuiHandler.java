@@ -6,6 +6,8 @@ import net.funshinex.arcaneimpulsion.tileentity.TileEntityArcaneCondenser;
 import net.funshinex.arcaneimpulsion.tileentity.TileEntityArcaneExtractor;
 import net.funshinex.arcaneimpulsion.tileentity.TileEntityIMStorage;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
@@ -44,7 +46,9 @@ public class GuiHandler implements IGuiHandler {
 			if (te!=null && te instanceof TileEntityIMStorage) {
 				return new ContainerIMStorage(player.inventory, (TileEntityIMStorage)te);
 			}
-			break;
+		case 4:
+			ItemStack stack = player.getCurrentEquippedItem();
+			return new ContainerArcaneWrench(player.inventory, new InventoryArcaneWrench(stack));
 		}
 		
 		return null;
@@ -79,6 +83,9 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiIMStorage(player.inventory, (TileEntityIMStorage)te);
 			}
 			break;
+		case 4:
+			ItemStack stack = player.getCurrentEquippedItem();
+			return new GuiArcaneWrench(player.inventory, new InventoryArcaneWrench(stack));
 		}
 		
 		return null;

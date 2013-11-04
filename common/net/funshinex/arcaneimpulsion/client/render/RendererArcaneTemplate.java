@@ -37,8 +37,8 @@ public class RendererArcaneTemplate implements IItemRenderer {
 		case 1:			
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			GL11.glScalef(.5F, .5F, .5F);
-			icon = Block.blockDiamond.getIcon(1, 1);
-			renderItem.renderIcon(0, 0, icon, 16, 16);
+			icon = new ItemStack(Block.cobblestone).getIconIndex();
+			renderItem.renderIcon(8, 8, icon, 16, 16);
 			break;
 		
 		case 2:

@@ -3,6 +3,7 @@ package net.funshinex.arcaneimpulsion;
 import net.funshinex.arcaneimpulsion.block.Blocks;
 import net.funshinex.arcaneimpulsion.client.inventory.GuiHandler;
 import net.funshinex.arcaneimpulsion.config.ConfigHandler;
+import net.funshinex.arcaneimpulsion.config.IMValues;
 import net.funshinex.arcaneimpulsion.item.Items;
 import net.funshinex.arcaneimpulsion.network.PacketHandler;
 import net.funshinex.arcaneimpulsion.proxy.CommonProxy;
@@ -32,6 +33,7 @@ public class ArcaneImpulsion {
 	public void preInit(FMLPreInitializationEvent event) {
 		
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
+		IMValues.init(event.getSuggestedConfigurationFile());
 		
 		Items.init();
 		Blocks.init();

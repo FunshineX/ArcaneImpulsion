@@ -21,4 +21,10 @@ public class ItemArcaneTemplate extends Item {
     public void registerIcons(IconRegister register) {
         itemIcon = register.registerIcon(ItemInfo.TEXTURE_LOCATION + ":" + ItemInfo.ARCANE_TEMPLATE_ICON);
     }
+	
+	//@Override
+	//@SideOnly(Side.CLIENT)
+	//public int getSpriteNumber() {
+	//	return super.getSpriteNumber();
+	//}
 }

@@ -1,27 +1,23 @@
 package net.funshinex.arcaneimpulsion.client.inventory;
 
-import net.funshinex.arcaneimpulsion.tileentity.TileEntityIMStorage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiIMStorage extends GuiContainer {
+public class GuiArcaneWrench extends GuiContainer {
 
-	private TileEntityIMStorage imStorage;
-	
-	public GuiIMStorage(InventoryPlayer invPlayer, TileEntityIMStorage imStorage) {
-		super(new ContainerIMStorage(invPlayer, imStorage));
-		
-		this.imStorage = imStorage;
+	public GuiArcaneWrench(InventoryPlayer invPlayer, InventoryArcaneWrench invWrench) { 
+		super(new ContainerArcaneWrench(invPlayer, invWrench));
 		
 		xSize = 176;
 		ySize = 166;
 	}
 	
-	private static final ResourceLocation texture = new ResourceLocation("arcaneimpulsion", "textures/gui/imstorage.png");
+	private static final ResourceLocation texture = new ResourceLocation("arcaneimpulsion", "textures/gui/arcanewrench.png");
 	
 
 	@Override
@@ -35,10 +31,6 @@ public class GuiIMStorage extends GuiContainer {
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		fontRenderer.drawString("IM Storage", 8, 6, 0x404040);
-		
-		fontRenderer.drawString(imStorage.getInternalStorage() + " IMs", 20, 20, 0x404040);
-		
+				
 	}
-
 }
